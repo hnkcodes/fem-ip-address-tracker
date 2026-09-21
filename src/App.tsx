@@ -12,9 +12,9 @@ function App() {
       setIsLoading(true);
 
       let url = "/api/location";
-      if (queryType === "ip") {
+      if (queryType === "ip" && query) {
         url = `/api/location?ipAddress=${encodeURIComponent(query)}`;
-      } else if (queryType === "domain") {
+      } else if (queryType === "domain" && query) {
         url = `/api/location?domain=${encodeURIComponent(query)}`;
       }
 
