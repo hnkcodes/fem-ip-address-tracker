@@ -3,8 +3,6 @@ import Header from "./components/Header";
 import Map from "./components/Map";
 import type AddressObj from "./interface/AddressObj";
 
-const ipKey = import.meta.env.VITE_IP_ADDRESS_API_KEY;
-
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<string | null>(null);
@@ -13,11 +11,11 @@ function App() {
     try {
       setIsLoading(true);
 
-      let url = `https://geo.ipify.org/api/v2/country,city?apiKey=${ipKey}`;
+      let url = "/api/location";
       if (queryType === "ip") {
-        url = `https://geo.ipify.org/api/v2/country,city?apiKey=${ipKey}&ipAddress=${query}`;
+        url = `/api/location?ipAddress=${encodeURIComponent(query)}`;
       } else if (queryType === "domain") {
-        url = `https://geo.ipify.org/api/v2/country,city?apiKey=${ipKey}&domain=${query}`;
+        url = `/api/location?domain=${encodeURIComponent(query)}`;
       }
 
       const resData = await fetch(url);
